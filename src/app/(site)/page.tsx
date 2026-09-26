@@ -1,6 +1,10 @@
 import { Hero } from "@/components/landing/Hero";
 import { ServicesList } from "@/components/landing/ServicesList";
+import { Gallery } from "@/components/landing/Gallery";
 import { OperatingHoursBanner } from "@/components/landing/OperatingHoursBanner";
+import { MobileBookNow } from "@/components/landing/MobileBookNow";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { createClient } from "@/lib/supabase/server";
 import type { OperatingHours, Service } from "@/types";
 
@@ -30,21 +34,21 @@ export default async function LandingPage() {
   const { services, hours } = await getLandingData();
 
   return (
-    <main>
+    <main className="pb-24 md:pb-0">
       <OperatingHoursBanner hours={hours} />
-      <Hero />
-      <ServicesList services={services} />
-
-      <footer className="border-t border-border-slate">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-10 text-sm text-muted-gray">
-          <p>Savage Lifestyle Barber Shop · Accra</p>
-          <a href="/admin/login" className="hover:text-neon-silver">
-            
-          </a>
-        </div>
-      </footer>
+      <ScrollReveal>
+        <Hero />
+      </ScrollReveal>
+      <ScrollReveal>
+        <ServicesList services={services} />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Gallery />
+      </ScrollReveal>
+      <ScrollReveal>
+        <SiteFooter />
+      </ScrollReveal>
+      <MobileBookNow />
     </main>
   );
 }
-
-

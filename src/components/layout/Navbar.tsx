@@ -19,6 +19,12 @@ export function Navbar() {
             Services
           </Link>
           <Link
+            href="/#gallery"
+            className="hidden text-sm text-muted-gray hover:text-neon-silver sm:inline"
+          >
+            Gallery
+          </Link>
+          <Link
             href="/booking"
             className="hidden text-sm text-muted-gray hover:text-neon-silver sm:inline"
           >

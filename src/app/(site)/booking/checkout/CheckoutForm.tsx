@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 import type { Booking, PaymentOption, Service } from "@/types";
 import { createClient } from "@/lib/supabase/client";
 import { CountdownTimer } from "@/components/booking/CountdownTimer";
@@ -13,6 +14,12 @@ import { formatCurrency, formatDateTimeLabel } from "@/lib/utils";
 import type { User } from "@supabase/supabase-js";
 
 type BookingWithService = Booking & { service: Service };
+
+const sectionEnter = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.35, ease: "easeOut" as const },
+};
 
 export function CheckoutForm({ bookingId }: { bookingId: string }) {
   const router = useRouter();
@@ -28,6 +35,9 @@ export function CheckoutForm({ bookingId }: { bookingId: string }) {
 
   const [submitting, setSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
+
+  const paymentRef = useRef<HTMLDivElement>(null);
+  const emailRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     fetch(`/api/bookings/${bookingId}`)
@@ -47,6 +57,25 @@ export function CheckoutForm({ bookingId }: { bookingId: string }) {
       }
     });
   }, [bookingId]);
+
+  const detailsReady =
+    (Boolean(user) || fullName.trim().length > 0) && phoneNumber.trim().length > 0;
+
+  useEffect(() => {
+    if (!detailsReady) return;
+    const id = window.setTimeout(() => {
+      paymentRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 200);
+    return () => window.clearTimeout(id);
+  }, [detailsReady]);
+
+  useEffect(() => {
+    if (paymentMethod !== "pay_online") return;
+    const id = window.setTimeout(() => {
+      emailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 200);
+    return () => window.clearTimeout(id);
+  }, [paymentMethod]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -207,38 +236,48 @@ export function CheckoutForm({ bookingId }: { bookingId: string }) {
           required
         />
 
-        <div>
-          <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-gray">
-            Payment
-          </h2>
-          <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
-        </div>
+        {detailsReady && (
+          <motion.div
+            ref={paymentRef}
+            className="scroll-mt-24 flex flex-col gap-4"
+            {...sectionEnter}
+          >
+            <div>
+              <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-gray">
+                Payment
+              </h2>
+              <PaymentMethodSelector value={paymentMethod} onChange={setPaymentMethod} />
+            </div>
 
-        {paymentMethod === "pay_online" && (
-          <Input
-            label="Email (for your payment receipt)"
-            name="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            required
-          />
+            {paymentMethod === "pay_online" && (
+              <motion.div ref={emailRef} className="scroll-mt-24" {...sectionEnter}>
+                <Input
+                  label="Email (for your payment receipt)"
+                  name="email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
+                  required
+                />
+              </motion.div>
+            )}
+
+            {formError && (
+              <p className="rounded-lg border border-error-red/30 bg-error-red/10 px-4 py-3 text-sm text-error-red">
+                {formError}
+              </p>
+            )}
+
+            <Button type="submit" size="lg" disabled={submitting}>
+              {submitting
+                ? "Confirming…"
+                : paymentMethod === "pay_online"
+                  ? "Continue to payment"
+                  : "Confirm booking"}
+            </Button>
+          </motion.div>
         )}
-
-        {formError && (
-          <p className="rounded-lg border border-error-red/30 bg-error-red/10 px-4 py-3 text-sm text-error-red">
-            {formError}
-          </p>
-        )}
-
-        <Button type="submit" size="lg" disabled={submitting}>
-          {submitting
-            ? "Confirming…"
-            : paymentMethod === "pay_online"
-              ? "Continue to payment"
-              : "Confirm booking"}
-        </Button>
       </form>
     </div>
   );

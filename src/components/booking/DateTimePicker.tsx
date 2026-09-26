@@ -98,7 +98,18 @@ export function DateTimePicker({
       </div>
 
       {loading && (
-        <p className="text-sm text-muted-gray">Loading available times…</p>
+        <div
+          className="grid grid-cols-3 gap-2 sm:grid-cols-4"
+          aria-busy="true"
+          aria-label="Loading available times"
+        >
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div
+              key={i}
+              className="h-11 animate-pulse rounded-lg border border-border-slate bg-surface-charcoal"
+            />
+          ))}
+        </div>
       )}
       {error && <p className="text-sm text-error-red">{error}</p>}
       {!loading && !error && slots.length === 0 && (
