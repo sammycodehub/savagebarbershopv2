@@ -1,0 +1,7 @@
+service_id,service_name,duration_mins,price,day_of_week,open_time,close_time
+SVC-001,Classic Haircut,30,50,1,09:00,19:00
+SVC-002,Skin Fade,45,70,2,09:00,19:00
+SVC-003,Beard Trim,20,30,3,09:00,19:00
+SVC-004,Haircut + Beard Combo,60,90,4,09:00,19:00
+SVC-005,Hot Towel Shave,30,60,5,09:00,20:00
+SVC-006,Kids Haircut (Under 12),25,40,6,09:00,20:00
