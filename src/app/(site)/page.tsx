@@ -39,10 +39,12 @@ export default async function LandingPage() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-10 text-sm text-muted-gray">
           <p>Savage Lifestyle Barber Shop · Accra</p>
           <a href="/admin/login" className="hover:text-neon-silver">
-            Staff login
+            
           </a>
         </div>
       </footer>
     </main>
   );
 }
+
+

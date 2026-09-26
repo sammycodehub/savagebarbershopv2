@@ -23,7 +23,7 @@ export function Hero() {
         </div>
 
         <h1 className="max-w-2xl text-[40px] font-bold leading-[1.1] text-neon-silver sm:text-[48px]">
-          Savage Lifestyle Barber Shop — premium cuts, zero wait.
+          Savage Lifestyle Barber Shop premium cuts, zero wait.
         </h1>
 
         <p className="max-w-xl text-base leading-relaxed text-muted-gray">
