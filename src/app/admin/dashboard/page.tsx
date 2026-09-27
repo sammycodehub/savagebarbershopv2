@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { DailyScheduleTable } from "@/components/admin/DailyScheduleTable";
 import { TransactionLogs } from "@/components/admin/TransactionLogs";
 import { WalkInBlockForm } from "@/components/admin/WalkInBlockForm";
+import { DashboardRefresh } from "@/components/admin/DashboardRefresh";
 import type { Booking, Payment, Service } from "@/types";
 
 async function getDashboardData() {
@@ -9,16 +10,12 @@ async function getDashboardData() {
 
   const todayStart = new Date();
   todayStart.setHours(0, 0, 0, 0);
-  const todayEnd = new Date();
-  todayEnd.setHours(23, 59, 59, 999);
-
   const [{ data: bookings }, { data: payments }, { data: services }] =
     await Promise.all([
       supabase
         .from("bookings")
         .select("*, service:services(*)")
         .gte("appointment_timestamp", todayStart.toISOString())
-        .lte("appointment_timestamp", todayEnd.toISOString())
         .in("status", ["confirmed", "held", "completed"])
         .order("appointment_timestamp", { ascending: true }),
       supabase
@@ -41,9 +38,10 @@ export default async function AdminDashboardPage() {
 
   return (
     <div className="flex flex-col gap-10">
+      <DashboardRefresh />
       <div>
         <h1 className="text-2xl font-semibold text-neon-silver">
-          Today&apos;s schedule
+          Today &amp; upcoming schedule
         </h1>
         <p className="mt-1 text-sm text-muted-gray">
           {new Date().toLocaleDateString("en-GH", {

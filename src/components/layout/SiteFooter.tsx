@@ -84,12 +84,6 @@ export function SiteFooter() {
               Open by appointment. Book online to lock your chair.
             </p>
           </div>
-          <a
-            href="/admin/login"
-            className="mt-8 text-xs text-muted-gray/70 hover:text-muted-gray"
-          >
-            Staff login
-          </a>
         </div>
       </div>
     </footer>

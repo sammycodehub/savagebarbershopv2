@@ -34,16 +34,9 @@ export function BookingFlow({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const serviceRef = useRef<HTMLElement>(null);
   const datetimeRef = useRef<HTMLElement>(null);
   const summaryRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (!selectedService) return;
-    const id = window.setTimeout(() => {
-      scrollSectionIntoView(datetimeRef.current);
-    }, 200);
-    return () => window.clearTimeout(id);
-  }, [selectedService]);
 
   useEffect(() => {
     if (!selectedSlot) return;
@@ -84,7 +77,11 @@ export function BookingFlow({
 
   return (
     <div className="flex flex-col gap-10">
-      <section className="scroll-mt-24">
+      <motion.section
+        ref={serviceRef}
+        className="scroll-mt-24"
+        {...sectionEnter}
+      >
         <h2 className="mb-3 text-sm font-medium uppercase tracking-wide text-muted-gray">
           1. Choose a service
         </h2>
@@ -94,9 +91,12 @@ export function BookingFlow({
           onSelect={(service) => {
             setSelectedService(service);
             setSelectedSlot(null);
+            window.setTimeout(() => {
+              scrollSectionIntoView(datetimeRef.current);
+            }, 200);
           }}
         />
-      </section>
+      </motion.section>
 
       {selectedService && (
         <motion.section

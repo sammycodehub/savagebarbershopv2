@@ -4,7 +4,10 @@ import { Scissors } from "lucide-react";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden border-b border-border-slate">
+    <section
+      id="hero"
+      className="relative overflow-hidden border-b border-border-slate"
+    >
       <div
         className="pointer-events-none absolute -top-40 left-1/2 h-[520px] w-[820px] -translate-x-1/2 rounded-full opacity-20 blur-3xl"
         style={{
