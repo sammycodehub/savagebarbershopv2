@@ -54,7 +54,7 @@ export function AdminLoginForm() {
     <>
       <h1 className="mb-1 text-2xl font-semibold text-neon-silver">Admin sign in</h1>
       <p className="mb-8 text-sm text-muted-gray">
-        Savage Lifestyle Barber Shop — staff access only.
+        Savage Lifestyle Barber Shop, staff access only.
       </p>
 
       {unauthorized && (

@@ -20,7 +20,7 @@ export function ServicesList({ services }: { services: Service[] }) {
         Available services
       </h2>
       <p className="mb-10 max-w-lg text-muted-gray">
-        Prices and durations sync straight from the shop&apos;s records — what
+        Prices and durations sync straight from the shop&apos;s records, what
         you see here is what you&apos;ll pay.
       </p>
 

@@ -30,7 +30,7 @@ export default async function BookingPage({
         Book your cut
       </h1>
       <p className="mb-10 text-muted-gray">
-        Pick a service and a time — we&apos;ll hold your slot for 10 minutes
+        Pick a service and a time, we&apos;ll hold your slot for 10 minutes
         while you finish checking out.
       </p>
       <BookingFlow services={services} preselectedId={preselectedId} />

@@ -7,8 +7,9 @@ const PHONES = [
 
 const WHATSAPP_CHAT = "https://wa.me/233551051122";
 const MAPS_SEARCH =
-  "https://www.google.com/maps/search/?api=1&query=Sowutuom+Accra+Ghana";
-const MAPS_EMBED = "https://www.google.com/maps?q=Sowutuom+Accra+Ghana&output=embed";
+  "https://www.google.com/maps/search/?api=1&query=5.631431862735625%2C-0.2949827988331736";
+const MAPS_EMBED =
+  "https://www.google.com/maps?q=5.631431862735625%2C-0.2949827988331736&output=embed";
 
 export function SiteFooter() {
   return (
@@ -19,7 +20,7 @@ export function SiteFooter() {
             Savage Lifestyle Barber Shop
           </p>
           <p className="mt-2 text-sm leading-relaxed text-muted-gray">
-            Premium cuts, zero wait — booked on your schedule.
+            Premium cuts, zero wait, booked on your schedule.
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export function SiteFooter() {
           </h2>
           <p className="mt-3 flex items-start gap-2 text-sm text-neon-silver">
             <MapPin size={14} className="mt-0.5 shrink-0 text-savage-gold" />
-            Sowutuom, Accra, Ghana
+            JPJ4+F2 Ablekuma Fan-Milk, Ghana
           </p>
           <a
             href={MAPS_SEARCH}
@@ -67,7 +68,7 @@ export function SiteFooter() {
             Get directions
           </a>
           <iframe
-            title="Map of Sowutuom, Accra, Ghana"
+            title="Map of JPJ4+F2 Ablekuma Fan-Milk, Ghana"
             src={MAPS_EMBED}
             className="mt-3 h-32 w-full rounded-lg border border-border-slate"
             loading="lazy"

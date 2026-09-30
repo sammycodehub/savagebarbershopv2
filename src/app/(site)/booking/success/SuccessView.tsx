@@ -47,7 +47,7 @@ export function SuccessView({
       <div className="text-center">
         <XCircle className="mx-auto mb-4 text-error-red" size={48} />
         <h1 className="text-xl font-semibold text-neon-silver">
-          Payment failed — try again
+          Payment failed. Please try again
         </h1>
         <p className="mt-2 text-sm text-muted-gray">
           Your slot hold was released. No charge was made.
@@ -79,7 +79,7 @@ export function SuccessView({
       <CheckCircle2 className="mx-auto mb-4 text-success-green" size={48} />
       <h1 className="text-xl font-semibold text-neon-silver">Booking confirmed</h1>
       <p className="mt-2 text-sm text-muted-gray">
-        We&apos;ve got you down — see you then.
+        We&apos;ve got you down, see you then.
       </p>
 
       <div className="mt-6 rounded-xl border border-border-slate bg-surface-charcoal p-5 text-left">

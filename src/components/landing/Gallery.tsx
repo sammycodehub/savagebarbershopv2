@@ -24,7 +24,7 @@ export function Gallery() {
         Gallery
       </h2>
       <p className="mb-10 max-w-lg text-muted-gray">
-        A look at recent cuts and shaves from the chair — tap any photo to
+        A look at recent cuts and shaves from the chair,tap any photo to
         view it full size.
       </p>
 
